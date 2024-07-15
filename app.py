@@ -11,11 +11,18 @@ from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from dotenv import load_dotenv
 import time
 
+# Load the environment variables from the .env file
 load_dotenv()
 
-# Load the GROQ And OpenAI API KEY
+# Load the GROQ and Google API keys from the environment variables
 groq_api_key = os.getenv('GROQ_API_KEY')
-os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY")
+google_api_key = os.getenv('GOOGLE_API_KEY')
+
+# Check if the API keys are loaded properly
+if groq_api_key is None:
+    st.error("GROQ API Key is missing. Please check your .env file.")
+if google_api_key is None:
+    st.error("Google API Key is missing. Please check your .env file.")
 
 st.title("Document Q&A")
 
